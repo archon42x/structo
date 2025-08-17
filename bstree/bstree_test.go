@@ -185,7 +185,7 @@ func BenchmarkPut(b *testing.B) {
 func BenchmarkGet(b *testing.B) {
 	tree := New[int, struct{}]()
 
-	keys := make([]int, 100000)
+	keys := make([]int, b.N)
 	for i := 0; i < len(keys); i++ {
 		keys[i] = rand.Int()
 		tree.Put(keys[i], struct{}{})
