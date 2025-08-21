@@ -172,43 +172,125 @@ func TestGet(t *testing.T) {
 	}
 }
 
-func BenchmarkPut(b *testing.B) {
-	tree := New[int, any]()
-
-	b.ResetTimer()
+func benchmarkPut(b *testing.B, tree *BSTree[int, struct{}], size int) {
 	for i := 0; i < b.N; i++ {
-		key := rand.Int()
-		tree.Put(key, struct{}{})
+		for n := 0; n < size; n++ {
+			tree.Put(n, struct{}{})
+		}
 	}
 }
 
-func BenchmarkGet(b *testing.B) {
-	tree := New[int, struct{}]()
-
-	keys := make([]int, b.N)
-	for i := 0; i < len(keys); i++ {
-		keys[i] = rand.Int()
-		tree.Put(keys[i], struct{}{})
-	}
-
-	b.ResetTimer()
+func benchmarkRemove(b *testing.B, tree *BSTree[int, struct{}], size int) {
 	for i := 0; i < b.N; i++ {
-		key := keys[rand.Intn(len(keys))]
-		tree.Get(key)
+		for n := 0; n < size; n++ {
+			tree.Remove(n)
+		}
 	}
 }
 
-func BenchmarkRemove(b *testing.B) {
-	tree := New[int, struct{}]()
-
-	keys := make([]int, b.N)
+func benchmarkGet(b *testing.B, tree *BSTree[int, struct{}], size int) {
 	for i := 0; i < b.N; i++ {
-		keys[i] = rand.Int()
-		tree.Put(keys[i], struct{}{})
+		for n := 0; n < size; n++ {
+			tree.Get(n)
+		}
+	}
+}
+
+func BenchmarkPut1000(b *testing.B) {
+	size := 1000
+	tree := New[int, struct{}]()
+	for n := 0; n < size; n++ {
+		tree.Put(n, struct{}{})
 	}
 
 	b.ResetTimer()
-	for i := 0; i < b.N; i++ {
-		tree.Remove(keys[i])
+	benchmarkPut(b, tree, size)
+}
+
+func BenchmarkRemove1000(b *testing.B) {
+	size := 1000
+	tree := New[int, struct{}]()
+	for i := 0; i < size; i++ {
+		tree.Put(i, struct{}{})
 	}
+
+	b.ResetTimer()
+	benchmarkRemove(b, tree, size)
+}
+
+func BenchmarkGet1000(b *testing.B) {
+	size := 1000
+	tree := New[int, struct{}]()
+	for i := 0; i < size; i++ {
+		tree.Put(i, struct{}{})
+	}
+
+	b.ResetTimer()
+	benchmarkGet(b, tree, size)
+}
+
+func BenchmarkPut10000(b *testing.B) {
+	size := 10000
+	tree := New[int, struct{}]()
+	for n := 0; n < size; n++ {
+		tree.Put(n, struct{}{})
+	}
+
+	b.ResetTimer()
+	benchmarkPut(b, tree, size)
+}
+
+func BenchmarkRemove10000(b *testing.B) {
+	size := 10000
+	tree := New[int, struct{}]()
+	for i := 0; i < size; i++ {
+		tree.Put(i, struct{}{})
+	}
+
+	b.ResetTimer()
+	benchmarkRemove(b, tree, size)
+}
+
+func BenchmarkGet10000(b *testing.B) {
+	size := 10000
+	tree := New[int, struct{}]()
+	for i := 0; i < size; i++ {
+		tree.Put(i, struct{}{})
+	}
+
+	b.ResetTimer()
+	benchmarkGet(b, tree, size)
+}
+
+func BenchmarkPut100000(b *testing.B) {
+	size := 100000
+	tree := New[int, struct{}]()
+	for n := 0; n < size; n++ {
+		tree.Put(n, struct{}{})
+	}
+
+	b.ResetTimer()
+	benchmarkPut(b, tree, size)
+}
+
+func BenchmarkRemove100000(b *testing.B) {
+	size := 100000
+	tree := New[int, struct{}]()
+	for i := 0; i < size; i++ {
+		tree.Put(i, struct{}{})
+	}
+
+	b.ResetTimer()
+	benchmarkRemove(b, tree, size)
+}
+
+func BenchmarkGet100000(b *testing.B) {
+	size := 100000
+	tree := New[int, struct{}]()
+	for i := 0; i < size; i++ {
+		tree.Put(i, struct{}{})
+	}
+
+	b.ResetTimer()
+	benchmarkGet(b, tree, size)
 }
