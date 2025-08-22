@@ -196,6 +196,72 @@ func benchmarkGet(b *testing.B, tree *BSTree[int, struct{}], size int) {
 	}
 }
 
+func BenchmarkPut10(b *testing.B) {
+	size := 10
+	tree := New[int, struct{}]()
+	for n := 0; n < size; n++ {
+		tree.Put(n, struct{}{})
+	}
+
+	b.ResetTimer()
+	benchmarkPut(b, tree, size)
+}
+
+func BenchmarkRemove10(b *testing.B) {
+	size := 10
+	tree := New[int, struct{}]()
+	for i := 0; i < size; i++ {
+		tree.Put(i, struct{}{})
+	}
+
+	b.ResetTimer()
+	benchmarkRemove(b, tree, size)
+}
+
+func BenchmarkGet10(b *testing.B) {
+	size := 10
+	tree := New[int, struct{}]()
+	for i := 0; i < size; i++ {
+		tree.Put(i, struct{}{})
+	}
+
+	b.ResetTimer()
+	benchmarkGet(b, tree, size)
+}
+
+func BenchmarkPut100(b *testing.B) {
+	size := 100
+	tree := New[int, struct{}]()
+	for n := 0; n < size; n++ {
+		tree.Put(n, struct{}{})
+	}
+
+	b.ResetTimer()
+	benchmarkPut(b, tree, size)
+}
+
+func BenchmarkRemove100(b *testing.B) {
+	size := 100
+	tree := New[int, struct{}]()
+	for i := 0; i < size; i++ {
+		tree.Put(i, struct{}{})
+	}
+
+	b.ResetTimer()
+	benchmarkRemove(b, tree, size)
+}
+
+func BenchmarkGet100(b *testing.B) {
+	size := 100
+	tree := New[int, struct{}]()
+	for i := 0; i < size; i++ {
+		tree.Put(i, struct{}{})
+	}
+
+	b.ResetTimer()
+	benchmarkGet(b, tree, size)
+}
+
 func BenchmarkPut1000(b *testing.B) {
 	size := 1000
 	tree := New[int, struct{}]()
