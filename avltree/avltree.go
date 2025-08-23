@@ -37,6 +37,11 @@ func (tree *AVLTree[K, V]) Size() uint32 {
 	return tree.size
 }
 
+func (tree *AVLTree[K, V]) Clear() {
+	tree.root = nil
+	tree.size = 0
+}
+
 func (tree *AVLTree[K, V]) Put(key K, value V) {
 	node := tree.root
 	if node == nil {

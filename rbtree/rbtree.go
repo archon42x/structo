@@ -43,6 +43,11 @@ func (tree *RBTree[K, V]) Size() uint32 {
 	return tree.size
 }
 
+func (tree *RBTree[K, V]) Clear() {
+	tree.root = nil
+	tree.size = 0
+}
+
 func (tree *RBTree[K, V]) Put(key K, value V) {
 	node := tree.root
 	if node == nil {

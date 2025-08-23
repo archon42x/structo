@@ -36,6 +36,11 @@ func (tree *BSTree[K, V]) Size() uint32 {
 	return tree.size
 }
 
+func (tree *BSTree[K, V]) Clear() {
+	tree.root = nil
+	tree.size = 0
+}
+
 func (tree *BSTree[K, V]) Put(key K, value V) {
 	node := tree.root
 	if node == nil {
