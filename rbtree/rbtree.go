@@ -39,6 +39,10 @@ func NewWith[K comparable, V any](comparator utils.Comparator[K]) *RBTree[K, V] 
 	}
 }
 
+func (tree *RBTree[K, V]) Size() uint32 {
+	return tree.size
+}
+
 func (tree *RBTree[K, V]) Put(key K, value V) {
 	node := tree.root
 	if node == nil {

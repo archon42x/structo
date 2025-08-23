@@ -32,6 +32,10 @@ func NewWith[K comparable, V any](comparator utils.Comparator[K]) *BSTree[K, V] 
 	}
 }
 
+func (tree *BSTree[K, V]) Size() uint32 {
+	return tree.size
+}
+
 func (tree *BSTree[K, V]) Put(key K, value V) {
 	node := tree.root
 	if node == nil {
