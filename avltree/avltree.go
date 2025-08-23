@@ -33,6 +33,10 @@ func NewWith[K comparable, V any](comparator utils.Comparator[K]) *AVLTree[K, V]
 	}
 }
 
+func (tree *AVLTree[K, V]) Size() uint32 {
+	return tree.size
+}
+
 func (tree *AVLTree[K, V]) Put(key K, value V) {
 	node := tree.root
 	if node == nil {
