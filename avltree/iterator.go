@@ -135,3 +135,10 @@ func (iter *Iterator[K, V]) Value() (value V, ok bool) {
 	}
 	return iter.node.value, true
 }
+
+func (iter *Iterator[K, V]) ValuePtr() (*V, bool) {
+	if iter.node == nil {
+		return nil, false
+	}
+	return &iter.node.value, true
+}
